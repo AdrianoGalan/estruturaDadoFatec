@@ -16,10 +16,15 @@ public class ControleEntradaDados {
 	private int pos;
 	private boolean comPos;
 	private String elemento;
+	private JTextField textFieldEntrada;
+	private JTextField textFieldPos;
 
 	public ControleEntradaDados(JTextField textFieldEntrada, JTextField textFieldPos, Lista lista, Pilha pilha,
 			Fila fila) {
 		super();
+		
+		this.textFieldEntrada = textFieldEntrada;
+		this.textFieldPos = textFieldPos;
 
 		this.elemento = textFieldEntrada.getText();
 
@@ -143,4 +148,11 @@ public class ControleEntradaDados {
 
 		return lista;
 	}
+	
+	// limpa campos de entradas
+		public void limpaCampos() {
+
+			textFieldEntrada.setText("");
+			textFieldPos.setText("");
+		}
 }

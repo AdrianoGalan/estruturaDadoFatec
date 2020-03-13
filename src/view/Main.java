@@ -8,6 +8,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controller.ControleBtAdd;
+import controller.ControleBtRemoveFila;
+import controller.ControleBtRemoveLista;
+import controller.ControleBtRemovePilha;
 import controller.ControleEntradaDados;
 import model.Fila;
 import model.Lista;
@@ -148,6 +152,28 @@ public class Main extends JFrame {
 		btnRemFila.setBounds(429, 154, 117, 25);
 		contentPane.add(btnRemFila);
 
+		ControleBtAdd btAddAll = new ControleBtAdd(tableLista, modelTableLista, modelTabPilha, modelTableFila, lista,
+				pilha, fila, tablePilha, tableFila, lblPilha, lblPosio, textFieldEntrada, textFieldPos);
+
+		ControleBtRemoveLista btRemoveLista = new ControleBtRemoveLista(tableLista, modelTableLista, modelTabPilha,
+				modelTableFila, lista, pilha, fila, tablePilha, tableFila, lblPilha, lblPosio, textFieldEntrada,
+				textFieldPos);
+
+		ControleBtRemoveFila btRemoveFila = new ControleBtRemoveFila(tableLista, modelTableLista, modelTabPilha,
+				modelTableFila, lista, pilha, fila, tablePilha, tableFila, lblPilha, lblPosio, textFieldEntrada,
+				textFieldPos);
+
+		ControleBtRemovePilha btRemovePilha = new ControleBtRemovePilha(tableLista, modelTableLista, modelTabPilha,
+				modelTableFila, lista, pilha, fila, tablePilha, tableFila, lblPilha, lblPosio, textFieldEntrada,
+				textFieldPos);
+
+		// chama Acao botoes
+		btnAddTodos.addActionListener(btAddAll);
+		textFieldEntrada.addActionListener(btAddAll);
+		btnRemovLista.addActionListener(btRemoveLista);
+		btnRemFila.addActionListener(btRemoveFila);
+		btnDesempilh.addActionListener(btRemovePilha);
+
 		// a√ß√£o bot√£o ADD LISTA
 		ActionListener btAddLista = new ActionListener() {
 
@@ -178,81 +204,33 @@ public class Main extends JFrame {
 
 			}
 		};
-		
-		//acao bot„o add todos
-		ActionListener btAddTodos = new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				
-				addTodos();
-				
-			}
-		};
-		
-		//acao botao remove lista
-		ActionListener btRemoveLista = new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				
-				tbRemoveLista();
-				
-			}
-		};
-		ActionListener btRemovePilha = new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				
-				btRemovePilha();
-				
-			}
-		};
-		
-		ActionListener btRemoveFila = new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				
-				btRemoveFila();
-				
-			}
-		};
 
 		// chama aÁ„o botoes
 		btnAddLista.addActionListener(btAddLista);
 		btnEmpilha.addActionListener(btAddPilha);
 		btnAddFila.addActionListener(btAddFila);
-		btnAddTodos.addActionListener(btAddTodos);
-		btnDesempilh.addActionListener(btRemovePilha);
-		btnRemovLista.addActionListener(btRemoveLista);
-		btnRemFila.addActionListener(btRemoveFila);
-		textFieldEntrada.addActionListener(btAddTodos);
-		
+
 	}
 
-	
 	private void addTodos() {
-		
+
 		ControleEntradaDados ce = new ControleEntradaDados(textFieldEntrada, textFieldPos, lista, pilha, fila);
 
-		if(!textFieldEntrada.getText().isEmpty()) {
-		
-		lista = ce.addLista();
-		pilha = ce.addPilha();
-		fila = ce.addFila();
-		povoaLista();
-		povoaFila();
-		povoaPilha();
-	
-		limpaCampos();
-		}else {
+		if (!textFieldEntrada.getText().isEmpty()) {
+
+			lista = ce.addLista();
+			pilha = ce.addPilha();
+			fila = ce.addFila();
+			povoaLista();
+			povoaFila();
+			povoaPilha();
+
+			limpaCampos();
+		} else {
 			JOptionPane.showMessageDialog(null, "Digite um dado de entrada");
 		}
 	}
-	
-	
+
 	private void addLista() {
 
 		ControleEntradaDados ce = new ControleEntradaDados(textFieldEntrada, textFieldPos, lista, pilha, fila);
@@ -260,7 +238,6 @@ public class Main extends JFrame {
 		lista = ce.addLista();
 		povoaLista();
 		limpaCampos();
-
 
 	}
 
@@ -284,37 +261,6 @@ public class Main extends JFrame {
 		limpaCampos();
 
 	}
-	
-	private void btRemoveFila() {
-		
-		ControleEntradaDados ce = new ControleEntradaDados(textFieldEntrada, textFieldPos, lista, pilha, fila);
-
-		fila = ce.removeFila();
-		povoaFila();
-		limpaCampos();
-		
-	}
-	
-	private void tbRemoveLista() {
-		
-		ControleEntradaDados ce = new ControleEntradaDados(textFieldEntrada, textFieldPos, lista, pilha, fila);
-
-		lista = ce.removeLista();
-		povoaLista();
-		limpaCampos();
-		
-	}
-	
-	private void btRemovePilha() {
-		
-		ControleEntradaDados ce = new ControleEntradaDados(textFieldEntrada, textFieldPos, lista, pilha, fila);
-
-		pilha = ce.removePilha();
-
-		povoaPilha();
-		limpaCampos();
-		
-	}
 
 	// povoa tabela pilha
 	private void povoaPilha() {
@@ -323,18 +269,15 @@ public class Main extends JFrame {
 		modelTabPilha.addLista(pilha.gravaObj());
 		tablePilha.setModel(modelTabPilha);
 
-		
 	}
-	
-	//povoa tabela Lida
-	private void povoaLista(){
-		
+
+	// povoa tabela Lida
+	private void povoaLista() {
 
 		modelTableLista.limpar();
 		modelTableLista.addLista(lista.gravaObj());
 		tableLista.setModel(modelTableLista);
 
-		
 	}
 
 	// povoa tabela Fila
@@ -344,7 +287,6 @@ public class Main extends JFrame {
 		modelTableFila.addLista(fila.gravaObj());
 		tableFila.setModel(modelTableFila);
 
-		
 	}
 
 	// limpa campos de entradas
