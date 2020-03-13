@@ -13,8 +13,8 @@ public class PilhaDinamica<T> extends EstruturaDinamica<T> {
 
 		} else {
 
-			No<T> aux = super.inicio;
-			No<T> anterior = inicio;
+			Node<T> aux = super.inicio;
+			Node<T> anterior = inicio;
 
 			while (aux.getProximo() != null) {
 

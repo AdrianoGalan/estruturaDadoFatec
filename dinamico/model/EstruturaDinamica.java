@@ -2,7 +2,7 @@ package model;
 
 public abstract class EstruturaDinamica<T> {
 
-	protected No<T> inicio;
+	protected Node<T> inicio;
 	protected int tamanho = 0;
 
 	public EstruturaDinamica() {
@@ -11,7 +11,7 @@ public abstract class EstruturaDinamica<T> {
 
 	public void add(T elemento) {
 
-		No<T> novo = new No<T>();
+		Node<T> novo = new Node<T>();
 
 		novo.setElemento(elemento);
 		novo.setProximo(null);
@@ -19,7 +19,7 @@ public abstract class EstruturaDinamica<T> {
 		if (inicio == null) {
 			inicio = novo;
 		} else {
-			No<T> aux;
+			Node<T> aux;
 			aux = inicio;
 
 			while (aux.getProximo() != null) {
@@ -45,7 +45,7 @@ public abstract class EstruturaDinamica<T> {
 			StringBuffer sb = new StringBuffer();
 			sb.append("[");
 
-			No<T> aux;
+			Node<T> aux;
 			aux = inicio;
 
 			while (aux != null) {

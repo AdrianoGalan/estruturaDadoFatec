@@ -13,7 +13,7 @@ public class ListaDinamica<T> extends EstruturaDinamica<T> {
 
 		} else {
 
-			No<T> novo = new No<T>();
+			Node<T> novo = new Node<T>();
 
 			novo.setElemento(elemento);
 			novo.setProximo(null);
@@ -27,7 +27,7 @@ public class ListaDinamica<T> extends EstruturaDinamica<T> {
 
 			} else {
 
-				No<T> aux;
+				Node<T> aux;
 				aux = super.inicio;
 
 				for (int i = 0; i < posicao -1 ; i++) {
@@ -45,7 +45,7 @@ public class ListaDinamica<T> extends EstruturaDinamica<T> {
 	
 	public void remover(int posicao) {
 
-		No<T> aux = super.inicio;
+		Node<T> aux = super.inicio;
 
 		if (posicao == 0) {
 
