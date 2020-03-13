@@ -9,6 +9,9 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controller.ControleBtAdd;
+import controller.ControleBtAddFila;
+import controller.ControleBtAddLista;
+import controller.ControleBtAddPilha;
 import controller.ControleBtRemoveFila;
 import controller.ControleBtRemoveLista;
 import controller.ControleBtRemovePilha;
@@ -167,132 +170,28 @@ public class Main extends JFrame {
 				modelTableFila, lista, pilha, fila, tablePilha, tableFila, lblPilha, lblPosio, textFieldEntrada,
 				textFieldPos);
 
+		ControleBtAddLista btAddLista = new ControleBtAddLista(tableLista, modelTableLista, modelTabPilha,
+				modelTableFila, lista, pilha, fila, tablePilha, tableFila, lblPilha, lblPosio, textFieldEntrada,
+				textFieldPos);
+
+		ControleBtAddPilha btAddPilha = new ControleBtAddPilha(tableLista, modelTableLista, modelTabPilha,
+				modelTableFila, lista, pilha, fila, tablePilha, tableFila, lblPilha, lblPosio, textFieldEntrada,
+				textFieldPos);
+
+		ControleBtAddFila btAddFila = new ControleBtAddFila(tableLista, modelTableLista, modelTabPilha, modelTableFila,
+				lista, pilha, fila, tablePilha, tableFila, lblPilha, lblPosio, textFieldEntrada, textFieldPos);
+
 		// chama Acao botoes
 		btnAddTodos.addActionListener(btAddAll);
 		textFieldEntrada.addActionListener(btAddAll);
 		btnRemovLista.addActionListener(btRemoveLista);
 		btnRemFila.addActionListener(btRemoveFila);
 		btnDesempilh.addActionListener(btRemovePilha);
-
-		// a√ß√£o bot√£o ADD LISTA
-		ActionListener btAddLista = new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-
-				addLista();
-
-			}
-		};
-
-		// AÁ„o bot„o add pilha
-		ActionListener btAddPilha = new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				addPilha();
-
-			}
-		};
-
-		// acao bot„o add fila
-		ActionListener btAddFila = new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				addFila();
-
-			}
-		};
-
-		// chama aÁ„o botoes
 		btnAddLista.addActionListener(btAddLista);
 		btnEmpilha.addActionListener(btAddPilha);
 		btnAddFila.addActionListener(btAddFila);
 
 	}
 
-	private void addTodos() {
 
-		ControleEntradaDados ce = new ControleEntradaDados(textFieldEntrada, textFieldPos, lista, pilha, fila);
-
-		if (!textFieldEntrada.getText().isEmpty()) {
-
-			lista = ce.addLista();
-			pilha = ce.addPilha();
-			fila = ce.addFila();
-			povoaLista();
-			povoaFila();
-			povoaPilha();
-
-			limpaCampos();
-		} else {
-			JOptionPane.showMessageDialog(null, "Digite um dado de entrada");
-		}
-	}
-
-	private void addLista() {
-
-		ControleEntradaDados ce = new ControleEntradaDados(textFieldEntrada, textFieldPos, lista, pilha, fila);
-
-		lista = ce.addLista();
-		povoaLista();
-		limpaCampos();
-
-	}
-
-	private void addPilha() {
-
-		ControleEntradaDados ce = new ControleEntradaDados(textFieldEntrada, textFieldPos, lista, pilha, fila);
-
-		pilha = ce.addPilha();
-
-		povoaPilha();
-		limpaCampos();
-
-	}
-
-	private void addFila() {
-
-		ControleEntradaDados ce = new ControleEntradaDados(textFieldEntrada, textFieldPos, lista, pilha, fila);
-
-		fila = ce.addFila();
-		povoaFila();
-		limpaCampos();
-
-	}
-
-	// povoa tabela pilha
-	private void povoaPilha() {
-
-		modelTabPilha.limpar();
-		modelTabPilha.addLista(pilha.gravaObj());
-		tablePilha.setModel(modelTabPilha);
-
-	}
-
-	// povoa tabela Lida
-	private void povoaLista() {
-
-		modelTableLista.limpar();
-		modelTableLista.addLista(lista.gravaObj());
-		tableLista.setModel(modelTableLista);
-
-	}
-
-	// povoa tabela Fila
-	private void povoaFila() {
-
-		modelTableFila.limpar();
-		modelTableFila.addLista(fila.gravaObj());
-		tableFila.setModel(modelTableFila);
-
-	}
-
-	// limpa campos de entradas
-	private void limpaCampos() {
-
-		textFieldEntrada.setText("");
-		textFieldPos.setText("");
-	}
 }
